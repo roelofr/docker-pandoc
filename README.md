@@ -4,7 +4,7 @@
 
 ## Packages
 
-a docker image based on **ubuntu 14.04** containing:
+a docker image based on **ubuntu LTS** containing:
 
 * `texlive-full`
 * `python-pygments`
@@ -25,10 +25,12 @@ a docker image based on **ubuntu 14.04** containing:
 
 Inherited from [blang/latex](https://hub.docker.com/r/blang/latex/).
 
+Monthly updated, by Docker auto-builds.
+
 ## Install
 
-[Docker Hub](https://hub.docker.com/r/janstuemmel/latex/)
+[Docker Hub](https://hub.docker.com/r/roelofr/latex/)
 
 ```sh
-docker pull janstuemmel/latex
+docker pull roelofr/latex
 ```
