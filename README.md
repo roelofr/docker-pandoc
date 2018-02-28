@@ -1,6 +1,6 @@
 # Docker Latex Image
 
-[![Build Status](https://travis-ci.org/janstuemmel/docker-latex.svg?branch=master)](https://travis-ci.org/janstuemmel/docker-latex)
+![Docker Automated build](https://img.shields.io/docker/automated/roelofr/latex.svg)
 
 ## Packages
 
