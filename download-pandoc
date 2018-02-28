@@ -1,0 +1,97 @@
+#!/usr/bin/env php
+<?php
+
+namespace Roelofr\Pandoc;
+
+$ver = curl_version();
+define('CURL_USERAGENT', "PandocReleaseFinder; By Roelofr(+https://github.com/roelofr); cURL/{$ver['version']};");
+
+/**
+ * Returns contents from a URL.
+ *
+ * @param  string $url
+ * @return array|boolean|null
+ */
+function get($url, $file = null) {
+    $ch = curl_init();
+    curl_setopt_array($ch, [
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_USERAGENT => CURL_USERAGENT,
+        CURLOPT_URL => $url
+    ]);
+
+    // File or stream?
+    if ($file !== null && is_resource($file)) {
+        curl_setopt($ch, CURLOPT_FILE, $file);
+        $streaming = true;
+    } else {
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $streaming = false;
+    }
+
+    $res = curl_exec($ch);
+    $ok = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    curl_close($ch);
+
+    if ($streaming) {
+        return $ok === 200;
+    } else {
+        return $ok === 200 ? json_decode($res, true) : null;
+    }
+
+}
+
+if (!file_exists('/.dockerenv')) {
+    echo "Not in Docker. Aborting\n";
+    exit(1);
+}
+
+echo "Downloading release...\n";
+$release = get('https://api.github.com/repos/jgm/pandoc/releases/latest');
+
+if (empty($release['assets_url']) || empty($release['name'])) {
+    echo "Failed to find assets URL\n";
+    exit(1);
+}
+
+$releaseName = $release['name'];
+$releaseAssets = $release['assets_url'];
+
+echo "Downloading assets for {$releaseName}...\n";
+$assets = get($releaseAssets);
+
+// Find URL
+$url = null;
+foreach($assets as $asset) {
+    if (preg_match('/\.deb$/', $asset['name'])) {
+        $url = $asset['browser_download_url'];
+        break;
+    }
+}
+
+if ($url === null) {
+    echo "Failed to find URL\n";
+    exit(1);
+}
+
+$ok = -1;
+$file = tempnam(\sys_get_temp_dir(), 'pandoc');
+$command = sprintf(
+    "wget -A %s -O %s %s",
+    escapeshellarg(CURL_USERAGENT),
+    \escapeshellarg($file),
+    \escapeshellarg($url)
+);
+echo "+$command\n";
+passthru($command, $ok);
+
+if ($ok !== 0) {
+    echo "Failed to download\n";
+    exit ($ok);
+}
+
+$command = sprintf('dpkg -i %s', \escapeshellarg($file));
+echo "+$command\n";
+passthru($command, $ok);
+
+exit ($ok);
