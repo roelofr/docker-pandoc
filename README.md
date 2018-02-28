@@ -1,5 +1,6 @@
 # Docker Latex Image
 
+![Docker Automated build status](https://img.shields.io/docker/build/roelofr/latex.svg)
 ![Docker Automated build](https://img.shields.io/docker/automated/roelofr/latex.svg)
 
 ## Packages
