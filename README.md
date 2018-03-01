@@ -5,11 +5,9 @@
 
 ## Packages
 
-a docker image based on **ubuntu LTS** containing:
+a docker image based on `roelofr/texlive:full` containing:
 
-* `texlive-full`
-* `python-pygments`
-* `gnuplot`
+* `texlive`, from CTAN
 * `biber`
 * `pandoc`
 * `pandoc-citeproc`
@@ -24,7 +22,7 @@ a docker image based on **ubuntu LTS** containing:
 * `rsync`
 * `make`
 
-Inherited from [blang/latex](https://hub.docker.com/r/blang/latex/).
+Inherited from [roelofr/texlive](https://hub.docker.com/r/roelofr/texlive/).
 
 Monthly updated, by Docker auto-builds.
 

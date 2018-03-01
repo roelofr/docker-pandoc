@@ -1,6 +1,6 @@
-FROM blang/latex
+FROM roelofr/latex
 
-MAINTAINER Jan Stümmel <info@janstuemmel.de>
+LABEL maintainer="Roelof Roos <github@roelof.io>"
 
 RUN apt-get -y update \
     && apt-get -yq install \
