@@ -1,4 +1,4 @@
-FROM roelofr/latex
+FROM roelofr/texlive
 
 LABEL maintainer="Roelof Roos <github@roelof.io>"
 
