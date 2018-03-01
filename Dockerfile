@@ -4,16 +4,11 @@ LABEL maintainer="Roelof Roos <github@roelof.io>"
 
 RUN apt-get -y update \
     && apt-get -yq install \
-        biber \
         curl \
-        dpkg \
-        jq \
         locales \
         make \
-        rsync \
         tar \
         wget \
-        wput \
         zip \
     && apt-get autoclean \
     && apt-get clean \
