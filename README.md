@@ -1,35 +1,25 @@
-# Docker Latex Image
+# Docker Latex + Pandoc Image
 
-![Docker Automated build status](https://img.shields.io/docker/build/roelofr/latex.svg)
-![Docker Automated build](https://img.shields.io/docker/automated/roelofr/latex.svg)
+![Docker Automated build status](https://img.shields.io/docker/build/roelofr/pandoc.svg)
+![Docker Automated build](https://img.shields.io/docker/automated/roelofr/pandoc.svg)
 
 ## Packages
 
-a docker image based on `roelofr/texlive:full` containing:
+A docker image based on `roelofr/latex:full` containing:
 
-* `texlive`, from CTAN
-* `biber`
-* `pandoc`
-* `pandoc-citeproc`
+- All elements from `roelofr/latex:full`, plus
+- pandoc support
+- Wide language support
 
-... and extra tools:
 
-* `wget`
-* `wput`
-* `curl`
-* `zip`
-* `tar`
-* `rsync`
-* `make`
-
-Inherited from [roelofr/texlive](https://hub.docker.com/r/roelofr/texlive/).
+Inherited from [roelofr/latex](https://hub.docker.com/r/roelofr/latex/).
 
 Monthly updated, by Docker auto-builds.
 
 ## Install
 
-[Docker Hub](https://hub.docker.com/r/roelofr/latex/)
+[Docker Hub](https://hub.docker.com/r/roelofr/pandoc/)
 
 ```sh
-docker pull roelofr/latex
+docker pull roelofr/pandoc
 ```

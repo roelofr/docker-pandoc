@@ -1,15 +1,9 @@
-FROM roelofr/texlive:full
+FROM roelofr/latex:full
 
 LABEL maintainer="Roelof Roos <github@roelof.io>"
 
 RUN apt-get -y update \
-    && apt-get -yq install \
-        curl \
-        locales \
-        make \
-        tar \
-        wget \
-        zip \
+    && apt-get -yq install locales \
     && apt-get autoclean \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
